@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static float minX, maxX, minY, maxY;
 
     void Awake()
@@ -21,15 +20,5 @@ public class WorldManager : MonoBehaviour
 
         maxX = topRight.x;
         maxY = topRight.y;
-    }
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

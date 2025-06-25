@@ -1,11 +1,14 @@
-using NUnit.Framework.Internal.Execution;
 using UnityEngine;
+using System.Collections.Generic;
+
 
 public class ParticleSpawner : MonoBehaviour
 {
-    public Transform particleParent;
-    public GameObject particlePrefab;
-    public int numberOfParticles = 100;
+    public Transform particleParent; // Parent transform to organize hierarchy
+    public GameObject particlePrefab; // Prefab to instantiate
+    public List<ParticleClass> spawnableParticleClasses; // List of possible types (e.g., proton, electron)
+    public int numberOfParticles = 100; // Total number to spawn
+
 
     void Start()
     {
@@ -16,12 +19,15 @@ public class ParticleSpawner : MonoBehaviour
                 Random.Range(WorldManager.minY, WorldManager.maxY),
                 0f
             );
-
             GameObject particle = Instantiate(particlePrefab, spawnPos, Quaternion.identity, particleParent);
 
-            // Random Velocity
+            // Assign random class
+            ParticleClass chosenClass = spawnableParticleClasses[Random.Range(0, spawnableParticleClasses.Count)];
+
+            // Give behaviour + assign class
             ParticleBehaviour behaviour = particle.GetComponent<ParticleBehaviour>();
             behaviour.velocity = Random.insideUnitCircle.normalized;
+            behaviour.AssignClass(chosenClass);
         }
     }
 

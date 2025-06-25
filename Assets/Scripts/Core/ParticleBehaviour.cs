@@ -6,17 +6,17 @@ public class ParticleBehaviour : MonoBehaviour
     public Vector2 velocity;
     public float speed = 1f;
 
-
-    // World-wrapping
-    public float minX, maxX, minY, maxY;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Assign Class info to particle
+    public void AssignClass(ParticleClass particleClass)
     {
-
+        Color colorToUse = particleClass != null ? particleClass.color : Color.magenta;
+        GetComponent<SpriteRenderer>().color = colorToUse;
+        speed = particleClass != null ? particleClass.speed : 1f;
     }
 
-    // Update is called once per frame
+
+
+    // Dynamic Behaviour
     void Update()
     {
         // move particle
